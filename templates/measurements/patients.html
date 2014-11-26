@@ -3,16 +3,74 @@
 {% block content %}
 <div class="row">
   <div class="col-md-8">
-      <h1>Pacientes: </h1>
+    <h3>¡Gracias por compartir tus datos con nosotros!</h3>
     {% if all_patients %}
-    <ul>
-      {% for patient in all_patients %}
-      <li><h3>{{patient.patient_name}} {{patient.patient_last_name}}</h3></li>
-      <li><strong>{{patient.patient_imc|floatformat:4}}</strong></li>
-      <li><strong>{{patient.patient_status}}</strong></li>
+      <table class="table table-striped table-hover ">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Estatura</th>
+            <th>Peso</th>
+            <th>IMC</th>
+            <th>Estatus</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for single_patient in all_patients %}
+          <tr>
+            <td><a href="/patients/{{single_patient.id}}">{{single_patient.id}}</a></td>
+            <td>{{single_patient.patient_name}}</td>
+            <td>{{single_patient.patient_last_name}}</td>
+            <td>{{single_patient.patient_age_choices}} años</td>
+            <td>{{single_patient.patient_height}} m</td>
+            <td>{{single_patient.patient_weight}} Kg</td>
+            <td>{{single_patient.patient_imc|floatformat:2}}</td>
+            <td>{{single_patient.patient_status}}</td>
+          </tr>
       {% endfor %}
-    </ul>
+      </tbody>
+      </table>
       {% endif %}
 {% endblock %}
   </div>
 </div>
+
+<!--   {% if single_patient.patient_status == 'Bajo' %}
+        <div class="alert alert-dismissable alert-info">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>¡Ojo!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus Bajo.
+        </div>
+      {% elif single_patient.patient_status == 'Normal' %}
+        <div class="alert alert-dismissable alert-success">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>¡Muy Bien!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus Normal.
+        </div>
+      {% elif single_patient.patient_status == 'Sobrepeso' %}
+        <div class="alert alert-dismissable alert-warning">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Sobrepeso.
+        </div>
+      {% elif single_patient.patient_status == 'Obesidad' %}
+        <div class="alert alert-dismissable alert-danger">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Obesidad.
+        </div>
+      {% elif single_patient.patient_status == 'Obesidad Grado 2' %}
+        <div class="alert alert-dismissable alert-danger">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Obesidad Grado 2.
+        </div>
+      {% elif single_patient.patient_status == 'Obesidad Grado 3' %}
+        <div class="alert alert-dismissable alert-danger">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Obesidad Grado 3.
+        </div>
+      {% else %}
+        <div class="alert alert-dismissable alert-info">
+          <button type="button" class="close" data-dismiss="alert">x</button>
+          N/A
+        </div>
+      {% endif %} -->

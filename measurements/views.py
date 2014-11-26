@@ -33,9 +33,18 @@ def add_patient(request):
         form = PatientForm(request.POST, request.FILES)
         if form.is_valid():
             form.save(commit=True)
-            return redirect(patients)
+            # patient_name = request.POST['patient_name']
+            # a=Patient.objects.get(id=a_id)
+
+            patient_id = Patient.objects.latest('id').id
+            return redirect(patient,slug=patient_id)
+            #print patient_form
+            #return redirect(success)
         else:
             print form.errors
     else:
         form = PatientForm()
     return render_to_response('measurements/add_patient.html', {'form': form}, context)
+
+def success(request):
+    print "HOLAA"

@@ -23,10 +23,11 @@ $( "#id_patient_fum" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
 <p>¡Bienvenida!</p>
 <p>Sabemos lo importante que es para ti la salud de tu bebé.</p>
 <p>Ingresa los siguientes datos para informarte sobre el estado de tu salud.</p>
-<form id="patient_form" method="post" action="/patients/add_patient/" enctype="multipart/form-data">
+<form  class="form-vertical md-4" id="patient_form" method="post" action="/patients/add_patient/" enctype="multipart/form-data">
+
   {% csrf_token %}
   {{ form | as_bootstrap }}
-  <input type="submit" name="submit" value="Create Post" class="btn btn-primary">
+  <input type="submit" name="submit" value="Crear Paciente" class="btn btn-primary">
 </form>
 <br>
 {% endblock %}
