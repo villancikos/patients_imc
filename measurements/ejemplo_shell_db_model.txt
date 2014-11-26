@@ -1,0 +1,4 @@
+p = Patient(patient_name = 'Fernando', patient_last_name='Villa', patient_age_choices=24,patient_weight=90,patient_height=1.83,patient_sdg=3,patient_fum='2014-12-31')
+
+
+p = Patient(patient_name = 'Fernando', patient_last_name='Villa', patient_age_choices=0,patient_weight=90,patient_height=1.83,patient_sdg=3,patient_fum='2014-12-31')

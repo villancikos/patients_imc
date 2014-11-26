@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+      <h1>Pacientes: </h1>
+    {% if all_patients %}
+    <ul>
+      {% for patient in all_patients %}
+      <li><h3>{{patient.patient_name}} {{patient.patient_last_name}}</h3></li>
+      <li><strong>{{patient.patient_imc|floatformat:4}}</strong></li>
+      <li><strong>{{patient.patient_status}}</strong></li>
+      {% endfor %}
+    </ul>
+      {% endif %}
+{% endblock %}
+  </div>
+</div>

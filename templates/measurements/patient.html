@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+      <h1>Pacientes: </h1>
+    {% if single_patient %}
+    <ul>
+
+      <li><h2>{{single_patient.patient_name}} {{single_patient.patient_last_name}}</h2></li>
+      <li><strong>{{single_patient.patient_imc|floatformat:4}}</strong></li>
+      <li><strong>{{single_patient.patient_status}}</strong></li>
+      {% if single_patient.patient_imc < 18.5 %}
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title">Peligro</h3>
+        </div>
+        <div class="panel-body">
+          Tu IMC ({{single_patient.patient_imc|floatformat:2}}) es Menor a 18.5
+        </div>
+      </div>
+      {% else %}
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Normal</h3>
+        </div>
+        <div class="panel-body">
+          Tu IMC esta Normal
+        </div>
+      </div>
+      {% endif %}
+
+    </ul>
+      {% endif %}
+{% endblock %}
+  </div>
+</div>

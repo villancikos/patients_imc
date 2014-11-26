@@ -1,0 +1,32 @@
+{% extends 'base.html'%}
+{% block extrahead %}
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+{% endblock %}
+
+{% block jquery %}
+
+$( "#id_patient_fum" ).datepicker();
+
+// getter
+var dateFormat = $( "#id_patient_fum" ).datepicker( "option", "dateFormat" );
+
+// setter
+$( "#id_patient_fum" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+
+
+{% endblock %}
+{% load bootstrap_tags %}
+{% block content %}
+
+<h3>Ingresa tus datos:</h3>
+<p>¡Bienvenida!</p>
+<p>Sabemos lo importante que es para ti la salud de tu bebé.</p>
+<p>Ingresa los siguientes datos para informarte sobre el estado de tu salud.</p>
+<form id="patient_form" method="post" action="/patients/add_patient/" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form | as_bootstrap }}
+  <input type="submit" name="submit" value="Create Post" class="btn btn-primary">
+</form>
+<br>
+{% endblock %}
