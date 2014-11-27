@@ -21,13 +21,14 @@ class Patient(models.Model):
     )
 
     patient_age_choices = models.PositiveSmallIntegerField(
-                "Tu edad:",
+                "Tu Edad:",
                 max_length = 2,
                 choices= age_choices,
                 help_text="Ingresa tu edad de la lista desplegable."
     )
 
     patient_weight = models.PositiveSmallIntegerField(
+                "Tu Peso:",
                 max_length=3,
                 choices = weight_choices,
                 help_text="Selecciona tu peso de la lista. Cerrado y en Kilogramos (55)"
