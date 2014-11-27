@@ -73,10 +73,14 @@ WSGI_APPLICATION = 'nutrition_project.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'nutrition.db'),
-    }
+   "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "de786knjcjbiqo",
+        "USER": "vjmtwrytbqneqz",
+        "PASSWORD": "9vB6hZG6Tn0kalsSqhzU_GdaX5",
+        "HOST": "ec2-54-243-51-102.compute-1.amazonaws.com",
+        "PORT": "5432",
+}
 }
 
 # Internationalization
@@ -103,10 +107,10 @@ STATIC_URL = '/static/'
 
 
 
-###################################################
+#################
+##################################
 
 import dj_database_url
-
 DATABASES['default'] =  dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
