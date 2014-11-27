@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-md-8">
+  <div class="center-block">
     <h3>¡Gracias por compartir tus datos con nosotros!</h3>
     {% if all_patients %}
       <table class="table table-striped table-hover ">
@@ -28,49 +28,67 @@
             <td>{{single_patient.patient_height}} m</td>
             <td>{{single_patient.patient_weight}} Kg</td>
             <td>{{single_patient.patient_imc|floatformat:2}}</td>
-            <td>{{single_patient.patient_status}}</td>
+            {% if single_patient.patient_status == 'Bajo' %}
+            <td>
+              <span class="text-info">{{single_patient.patient_status}}</span>
+            </td>
+            {% elif single_patient.patient_status == 'Normal' %}
+            <td>
+              <span class="text-success">{{single_patient.patient_status}}</span>
+            </td>
+            {% elif single_patient.patient_status == 'Sobrepeso' %}
+            <td>
+              <span class="text-warning">{{single_patient.patient_status}}</span>
+            </td>
+            {% else %}
+            <td>
+              <span class="text-danger">{{single_patient.patient_status}}</span>
+            </td>
+            {% endif %}
           </tr>
       {% endfor %}
       </tbody>
       </table>
       {% endif %}
-{% endblock %}
   </div>
 </div>
 
-<!--   {% if single_patient.patient_status == 'Bajo' %}
-        <div class="alert alert-dismissable alert-info">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>¡Ojo!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus Bajo.
-        </div>
-      {% elif single_patient.patient_status == 'Normal' %}
-        <div class="alert alert-dismissable alert-success">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>¡Muy Bien!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus Normal.
-        </div>
-      {% elif single_patient.patient_status == 'Sobrepeso' %}
-        <div class="alert alert-dismissable alert-warning">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Sobrepeso.
-        </div>
-      {% elif single_patient.patient_status == 'Obesidad' %}
-        <div class="alert alert-dismissable alert-danger">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Obesidad.
-        </div>
-      {% elif single_patient.patient_status == 'Obesidad Grado 2' %}
-        <div class="alert alert-dismissable alert-danger">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Obesidad Grado 2.
-        </div>
-      {% elif single_patient.patient_status == 'Obesidad Grado 3' %}
-        <div class="alert alert-dismissable alert-danger">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Obesidad Grado 3.
-        </div>
-      {% else %}
-        <div class="alert alert-dismissable alert-info">
-          <button type="button" class="close" data-dismiss="alert">x</button>
-          N/A
-        </div>
-      {% endif %} -->
+  <ul class="pagination pagination-sm">
+          {% if all_patients.has_previous %}
+              <li>
+                <a href="?page={{ all_patients.previous_page_number }}">«</a>
+              </li>
+          {% else %}
+              <li class="disabled">
+                <a href="#">«</a>
+              </li>
+          {% endif %}
+
+
+          {% for i in all_patients.paginator.page_range %}
+          {% ifequal i page.number %}
+          <li class="active">
+            {{i}}
+          </li>
+          {% else %}
+          <li>
+            <a href="?page={{i}}">{{i}}</a>
+          </li>
+          {% endifequal %}
+          {% endfor %}
+
+          {% if all_patients.has_next %}
+          <li>
+            <a href="?page={{ all_patients.next_page_number }}">»</a>
+          </li>
+          {% else %}
+          <li class="disabled">
+            <a href="#">»</a>
+          </li>
+          {% endif %}
+  </ul>
+
+{% endblock %}
+
+
+

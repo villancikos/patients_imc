@@ -39,9 +39,10 @@
     {% elif single_patient.patient_status == 'Normal' %}
       <div class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>¡Muy Bien!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus Normal.
+        <strong>¡Muy Bien!</strong> Tu IMC es de <a href="#" class="text-primary">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus Normal.
       </div>
-    {% elif single_patient.patient_status == 'Sobrepeso' %}
+
+
       <div class="alert alert-dismissable alert-warning">
         <button type="button" class="close" data-dismiss="alert">x</button>
         <strong>¡Cuidado!</strong> Tu IMC es de <a href="#">{{single_patient.patient_imc|floatformat:2}}</a> eso indica que estas en estatus de Sobrepeso.

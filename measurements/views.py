@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader, RequestContext
 from django.shortcuts import get_object_or_404, render_to_response, redirect
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from measurements.models import Patient
 from measurements.forms import PatientForm
 
@@ -15,8 +15,26 @@ def patient(request,slug):
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
+# def patients(request):
+#     all_patients = Patient.objects.all().order_by('-modified_date')
+#     t = loader.get_template('measurements/patients.html')
+#     context_dict = {'all_patients':all_patients,
+#     }
+#     c = Context(context_dict)
+#     return HttpResponse(t.render(c))
+
 def patients(request):
-    all_patients = Patient.objects.all().order_by('-modified_date')
+    patients = Patient.objects.all().order_by('-modified_date')
+    paginator =Paginator(patients,10)
+
+    page = request.GET.get('page')
+    try:
+        all_patients = paginator.page(page)
+    except PageNotAnInteger:
+        all_patients = paginator.page(1)
+    except EmptyPage:
+        all_patients = paginator.page(paginator.num_pages)
+
     t = loader.get_template('measurements/patients.html')
     context_dict = {'all_patients':all_patients,
     }
@@ -48,3 +66,6 @@ def add_patient(request):
 
 def success(request):
     print "HOLAA"
+
+def handle_page_not_found(request):
+    return redirect(patients)
