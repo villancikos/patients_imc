@@ -82,7 +82,7 @@ class Patient(models.Model):
             return 'Obesidad Grado 3'
 
     def __unicode__(self):
-        return str(self.id) + " " + self.patient_name + "  " + self.patient_last_name + " | IMC: " + str("{0:.2f}".format(self.patient_imc))
+        return "ID:"+str(self.id) + " ,Nombre:" + self.patient_name + " ,Apellido:" + self.patient_last_name + ", IMC: " + str("{0:.2f}".format(self.patient_imc))
 
 
 
