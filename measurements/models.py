@@ -69,7 +69,7 @@ class Patient(models.Model):
     ####### Probando si es mejor opcion #######
     @property
     def patient_status(self):
-        if self.patient_imc < 18.5:
+        if self.patient_imc <= 18.5:
             return 'Bajo'
         elif self.patient_imc < 24.9 and self.patient_imc >= 18.5:
             return 'Normal'
